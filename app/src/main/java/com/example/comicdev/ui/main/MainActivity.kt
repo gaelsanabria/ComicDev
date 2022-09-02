@@ -11,7 +11,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.comicdev.OnboardingActivity
 import com.example.comicdev.R
-import com.example.comicdev.SplashScreenFragment
 import com.example.comicdev.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -37,14 +36,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_profile
             )
         )
-
-        var dialog = SplashScreenFragment()
-        dialog.show(supportFragmentManager, "Splash Screen opened")
-        Handler().postDelayed({
-            dialog.dismiss()
-            val intent = Intent(this, OnboardingActivity::class.java)
-            startActivity(intent)
-        }, 2000)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
