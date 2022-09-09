@@ -3,4 +3,20 @@
     <string name="title_activity_onboarding">OnboardingActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="onboarding_title_1">Marvel Official API</string>
+    <string name="onboarding_title_2">Comics</string>
+    <string name="onboarding_title_3">Characters</string>
+    <string name="onboarding_text_1">Emocionate con todo el contenido oficial
+    que marvel pone a tu disposicion</string>
+    <string name="onboarding_text_2">Disfruta de los mejores comics oficiales
+    de Marvel</string>
+    <string name="onboarding_text_3">Admira todos tus personajes favoritos
+    de los comics</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
 </resources>
