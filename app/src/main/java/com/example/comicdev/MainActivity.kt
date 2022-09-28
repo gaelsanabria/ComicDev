@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         dialog.show(supportFragmentManager, "Splash Screen opened")
         Handler().postDelayed({
             dialog.dismiss()
+            val intent = Intent(this, OnboardingActivity::class.java)
+            startActivity(intent)
         }, 2000)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
