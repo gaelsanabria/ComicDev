@@ -1,79 +1,95 @@
 package com.example.comicdev
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.tabs.TabLayout
-import androidx.viewpager2.widget.ViewPager2
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.ImageView
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.comicdev.databinding.ActivityOnboardingBinding
 import com.example.comicdev.ui.main.ViewPagerAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class OnboardingActivity : AppCompatActivity() {
 
-    private lateinit var dot1:ImageView
-    private lateinit var dot2:ImageView
-    private lateinit var dot3:ImageView
-
-    private lateinit var viewPager2: ViewPager2
+    private val binding by lazy(LazyThreadSafetyMode.NONE) {
+        ActivityOnboardingBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_onboarding)
-        viewPager2=findViewById(R.id.view_pager)
-        dot1=findViewById(R.id.dot_1)
-        dot2=findViewById(R.id.dot_2)
-        dot3=findViewById(R.id.dot_3)
+        setContentView(binding.root)
 
-        val images = listOf(R.drawable.img_marvel_logo, R.drawable.img_hulk, R.drawable.img_spiderman)
-        val adapter= ViewPagerAdapter(images)
-        viewPager2.adapter = adapter
+        val images =
+            listOf(R.drawable.img_marvel_logo, R.drawable.img_hulk, R.drawable.img_spiderman)
+        val backColors =
+            listOf(R.color.darker_grey, R.color.background_green, R.color.background_red)
+        val titles = listOf(
+            R.string.onboarding_title_1,
+            R.string.onboarding_title_2,
+            R.string.onboarding_title_3
+        )
+        val textList = listOf(
+            R.string.onboarding_text_1,
+            R.string.onboarding_text_2,
+            R.string.onboarding_text_3
+        )
+        val adapter = ViewPagerAdapter(images, backColors, titles, textList)
+        binding.viewPager.adapter = adapter
 
-        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
+                triggerButtonChanges()
                 changeColor()
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
             }
 
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-                super.onPageScrollStateChanged(state)
-            }
-
         })
-    }
-
-    private fun changeColor() {
-        when(viewPager2.currentItem){
-            0 ->
-            {
-                dot1.setBackgroundColor(resources.getColor(R.color.default_red))
-                dot2.setBackgroundColor(resources.getColor(R.color.darker_grey))
-                dot3.setBackgroundColor(resources.getColor(R.color.darker_grey))
-            }
-            1 ->
-            {
-                dot1.setBackgroundColor(resources.getColor(R.color.darker_grey))
-                dot2.setBackgroundColor(resources.getColor(R.color.default_red))
-                dot3.setBackgroundColor(resources.getColor(R.color.darker_grey))
-            }
-            2 ->
-            {
-                dot1.setBackgroundColor(resources.getColor(R.color.darker_grey))
-                dot2.setBackgroundColor(resources.getColor(R.color.darker_grey))
-                dot3.setBackgroundColor(resources.getColor(R.color.default_red))
+        binding.btnNext.setOnClickListener() {
+            val currPos: Int = binding.viewPager.currentItem
+            if ((currPos + 1) != binding.viewPager.adapter?.itemCount) {
+                binding.viewPager.currentItem = currPos + 1
+            } else {
+                val intent = Intent(this, LoadingActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
     }
+
+    private fun triggerButtonChanges() {
+        if (binding.viewPager.currentItem < 2) {
+            binding.btnNext.setText(R.string.default_next)
+        } else {
+            binding.btnNext.setText(R.string.finish)
+        }
+    }
+
+    private fun changeColor() {
+        //DataBinding
+        when (binding.viewPager.currentItem) {
+            0 -> {
+                binding.dot1.setBackgroundColor(resources.getColor(R.color.default_red))
+                binding.dot2.setBackgroundColor(resources.getColor(R.color.darker_grey))
+                binding.dot3.setBackgroundColor(resources.getColor(R.color.darker_grey))
+            }
+            1 -> {
+                binding.dot1.setBackgroundColor(resources.getColor(R.color.darker_grey))
+                binding.dot2.setBackgroundColor(resources.getColor(R.color.default_red))
+                binding.dot3.setBackgroundColor(resources.getColor(R.color.darker_grey))
+            }
+            2 -> {
+                binding.dot1.setBackgroundColor(resources.getColor(R.color.darker_grey))
+                binding.dot2.setBackgroundColor(resources.getColor(R.color.darker_grey))
+                binding.dot3.setBackgroundColor(resources.getColor(R.color.default_red))
+            }
+        }
+    }
+
+    private fun showLoadingDialog(){
+            //MaterialAlertDialogBuilder(this).setView()
+    }
+
 }

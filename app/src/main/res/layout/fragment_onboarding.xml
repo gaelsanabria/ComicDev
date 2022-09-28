@@ -23,16 +23,18 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/circle_center"
+    <ImageView
+        android:id="@+id/circle_back"
         android:layout_marginBottom="200dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/circle_shape"/>
+        android:background="@drawable/circle_shape"
+        android:backgroundTint="@color/darker_grey"
+        />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_marginBottom="200dp"
@@ -45,16 +47,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/bottom_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/circle_center"
+        app:layout_constraintTop_toBottomOf="@id/circle_back"
         android:text="@string/onboarding_text_2"
         android:textColor="@color/light_grey"
         android:textSize="20dp"
         android:layout_marginTop="50dp"
         android:padding="25dp"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

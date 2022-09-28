@@ -14,18 +14,19 @@
 
     <LinearLayout
         android:id="@+id/dots_bar"
-        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
         android:background="@color/grey_background"
-        android:gravity="center"
-        android:layout_marginTop="60dp">
+        android:gravity="center">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:id="@+id/card_1"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_marginRight="50dp"
-            app:cardCornerRadius="15dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
             <ImageView
@@ -35,10 +36,11 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:id="@+id/card_2"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_marginRight="50dp"
-            app:cardCornerRadius="15dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
             <ImageView
@@ -48,9 +50,10 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            app:cardCornerRadius="15dp"
+            android:id="@+id/card_3"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
             <ImageView
@@ -61,12 +64,14 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/onboarding_button"
+        android:id="@+id/btn_next"
         android:layout_width="175dp"
         android:layout_height="60dp"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="30dp"
         android:backgroundTint="@color/default_red"
-        app:cornerRadius="45dp"
-        android:textAllCaps="false"/>
+        android:text="@string/default_next"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:cornerRadius="45dp" />
 </FrameLayout>
