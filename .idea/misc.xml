@@ -6,8 +6,10 @@
         <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.163" />
         <entry key="app/src/main/res/drawable/circle_shape_profile.xml" value="0.227" />
         <entry key="app/src/main/res/drawable/default_dot.xml" value="0.163" />
+        <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.176" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_nav_comics.xml" value="0.204" />
+        <entry key="app/src/main/res/drawable/ic_plus_symbol.xml" value="0.176" />
         <entry key="app/src/main/res/drawable/rounded_square.xml" value="0.163" />
         <entry key="app/src/main/res/drawable/selected_dot.xml" value="0.163" />
         <entry key="app/src/main/res/drawable/tab_selector.xml" value="0.163" />
@@ -21,6 +23,7 @@
         <entry key="app/src/main/res/layout/fragment_characters.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/layout/fragment_comics.xml" value="0.18568840579710144" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.2980072463768116" />
+        <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.19293478260869565" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2980072463768116" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/fragment_onboarding.xml" value="0.21038865052937158" />

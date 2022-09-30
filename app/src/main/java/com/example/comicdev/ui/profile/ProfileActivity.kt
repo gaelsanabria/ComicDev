@@ -7,7 +7,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.Spinner
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.comicdev.R
@@ -16,12 +18,20 @@ class ProfileActivity : AppCompatActivity() {
 
     private val mImageView:ImageView
         get() = findViewById(R.id.profile_picture)
+    var genders = arrayOf("Gender", "Male", "Female", "Unspecified")
+    private lateinit var spinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        spinner = findViewById(R.id.input_gender)
+        if (spinner != null) {
+            val adapter = ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, genders)
+            spinner.adapter = adapter }
         val add_pic: View = findViewById(R.id.add_picture)
+
         add_pic.setOnClickListener { view ->
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Choose an option")
