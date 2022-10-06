@@ -28,9 +28,9 @@ class CharactersFragment : Fragment() {
         _binding = FragmentCharactersBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textCharacters
+        //val textView: TextView = binding.textCharacters
         charactersViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            //textView.text = it
         }
         return root
     }

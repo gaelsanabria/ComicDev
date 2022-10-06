@@ -28,9 +28,9 @@ class ComicsFragment : Fragment() {
         _binding = FragmentComicsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textComics
+        //val textView: TextView = binding.textComics
         homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            //textView.text = it
         }
         return root
     }
