@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#3B3F41"
-    tools:context=".SplashScreenActivity">
+    tools:context=".SplashScreenFragment">
 
     <ImageView
         android:id="@+id/ic_splash_marvel"

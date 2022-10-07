@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Comics"
+            android:text="@string/comics"
             android:textColor="@color/light_grey"
             android:textSize="20dp" />
         <TextView
@@ -95,7 +95,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Characters"
+            android:text="@string/characters"
             android:textColor="@color/light_grey"
             android:textSize="20dp" />
         <TextView

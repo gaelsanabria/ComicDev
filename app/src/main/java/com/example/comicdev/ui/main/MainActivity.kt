@@ -1,15 +1,17 @@
-package com.example.comicdev
+package com.example.comicdev.ui.main
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AlertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.comicdev.OnboardingActivity
+import com.example.comicdev.R
+import com.example.comicdev.SplashScreenFragment
 import com.example.comicdev.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -29,11 +31,14 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_comics, R.id.navigation_characters, R.id.navigation_favorites, R.id.navigation_profile
+                R.id.navigation_comics,
+                R.id.navigation_characters,
+                R.id.navigation_favorites,
+                R.id.navigation_profile
             )
         )
 
-        var dialog = SplashScreenActivity()
+        var dialog = SplashScreenFragment()
         dialog.show(supportFragmentManager, "Splash Screen opened")
         Handler().postDelayed({
             dialog.dismiss()
