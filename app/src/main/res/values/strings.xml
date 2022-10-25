@@ -7,12 +7,12 @@
     <string name="onboarding_title_1">Marvel Official API</string>
     <string name="onboarding_title_2">Comics</string>
     <string name="onboarding_title_3">Characters</string>
-    <string name="onboarding_text_1">Emocionate con todo el contenido oficial
-    que marvel pone a tu disposicion</string>
-    <string name="onboarding_text_2">Disfruta de los mejores comics oficiales
-    de Marvel</string>
-    <string name="onboarding_text_3">Admira todos tus personajes favoritos
-    de los comics</string>
+    <string name="onboarding_text_1">Get excited with all the official content
+    that marvel puts at your disposal</string>
+    <string name="onboarding_text_2">Enjoy the best official comics
+    marvel</string>
+    <string name="onboarding_text_3">Admire all your favorite characters
+    from the comics</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -37,4 +37,5 @@
     <string name="complete_collection">Complete collection</string>
     <string name="comics">Comics</string>
     <string name="characters">Characters</string>
+    <string name="gender">Gender</string>
 </resources>

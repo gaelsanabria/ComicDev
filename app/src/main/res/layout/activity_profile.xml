@@ -32,6 +32,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_fullname"
+        style="?attr/textInputFilledStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -44,8 +45,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_fullname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:maxLength="100" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,7 +68,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:hint="Gender"
+            android:hint="@string/gender"
             app:layout_constraintStart_toStartOf="parent"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
@@ -73,12 +77,12 @@
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/input_gender"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="none" />
+                android:layout_height="match_parent" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="?attr/textInputFilledStyle"
             android:id="@+id/input_age"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -92,8 +96,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_age"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="3" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

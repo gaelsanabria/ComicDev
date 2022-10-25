@@ -4,13 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.comicdev.databinding.FragmentCameraGalleryDialogListDialogBinding
 
 // TODO: Customize parameter argument names
@@ -32,6 +28,10 @@ class CameraGalleryDialogFragment : BottomSheetDialogFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        dismiss()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,13 +43,13 @@ class CameraGalleryDialogFragment : BottomSheetDialogFragment() {
                 Intent.ACTION_PICK
             )
             pickPhoto.type = "image/*"
-            startActivityForResult(pickPhoto, 1)
+            requireActivity().startActivityForResult(pickPhoto, 1)
         }
         binding.selectCameraButton.setOnClickListener{
             val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(takePicture, 0)
+            requireActivity().startActivityForResult(takePicture, 0)
         }
-        binding.closeDialog.setOnClickListener(){
+        binding.closeDialog.setOnClickListener{
             dismiss()
         }
 
@@ -57,17 +57,6 @@ class CameraGalleryDialogFragment : BottomSheetDialogFragment() {
 
     }
 
-    companion object {
-
-        // TODO: Customize parameters
-        fun newInstance(itemCount: Int): CameraGalleryDialogFragment =
-            CameraGalleryDialogFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_ITEM_COUNT, itemCount)
-                }
-            }
-
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -12,8 +12,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.comicdev.OnboardingActivity
 import com.example.comicdev.R
 import com.example.comicdev.databinding.ActivityMainBinding
+import com.example.comicdev.ui.profile.ProfileActivity
+import androidx.appcompat.widget.Toolbar;
 
 class MainActivity : AppCompatActivity() {
+
+    private var profile = null
 
     private lateinit var binding: ActivityMainBinding
 
@@ -37,7 +41,11 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        if (profile == null){
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
