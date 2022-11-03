@@ -107,7 +107,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_saveinfo"
+        android:id="@+id/btn_continue"
         android:layout_width="175dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/default_red"

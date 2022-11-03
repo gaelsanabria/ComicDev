@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoadingActivity"
+            android:name=".LoadingFragment"
             android:exported="false" />
         <activity
             android:name=".OnboardingActivity"

@@ -1,10 +1,14 @@
 package com.example.comicdev
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
 import com.example.comicdev.databinding.ActivityOnboardingBinding
+import com.example.comicdev.ui.main.MainActivity
 import com.example.comicdev.ui.main.ViewPagerAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -52,7 +56,9 @@ class OnboardingActivity : AppCompatActivity() {
             if ((currPos + 1) != binding.viewPager.adapter?.itemCount) {
                 binding.viewPager.currentItem = currPos + 1
             } else {
-                val intent = Intent(this, LoadingActivity::class.java)
+                val sharedPreferences = getSharedPreferences("Onboarding", Context.MODE_PRIVATE)
+                sharedPreferences.edit().putString("onboarding", "1").apply()
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -86,10 +92,6 @@ class OnboardingActivity : AppCompatActivity() {
                 binding.dot3.setBackgroundColor(resources.getColor(R.color.default_red))
             }
         }
-    }
-
-    private fun showLoadingDialog(){
-            //MaterialAlertDialogBuilder(this).setView()
     }
 
 }

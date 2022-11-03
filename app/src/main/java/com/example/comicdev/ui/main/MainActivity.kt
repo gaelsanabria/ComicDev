@@ -3,23 +3,26 @@ package com.example.comicdev.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.comicdev.OnboardingActivity
+import com.example.comicdev.LoadingFragment
 import com.example.comicdev.R
 import com.example.comicdev.databinding.ActivityMainBinding
 import com.example.comicdev.ui.profile.ProfileActivity
-import androidx.appcompat.widget.Toolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
 
     private var profile = null
 
     private lateinit var binding: ActivityMainBinding
+
+    private val modalLoadingFragment = LoadingFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +46,15 @@ class MainActivity : AppCompatActivity() {
 
         navView.setupWithNavController(navController)
 
-        if (profile == null){
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-        }
+        modalLoadingFragment.show(supportFragmentManager, "Select Image resource DIALOG")
+
+        Handler().postDelayed({
+            if (profile == null){
+                modalLoadingFragment.dismiss()
+                val intent = Intent(this, ProfileActivity::class.java)
+                startActivity(intent)
+            }
+        }, 2000)
+
     }
 }

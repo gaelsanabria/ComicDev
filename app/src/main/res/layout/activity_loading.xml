@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoadingActivity"
+    tools:context=".LoadingFragment"
     android:background="@color/grey_background">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -17,15 +17,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="@string/loading_text"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon_loading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_loading"
+        android:backgroundTint="@color/default_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="24dp"/>
+        android:layout_marginBottom="30dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading_text"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        app:layout_constraintTop_toBottomOf="@id/icon_loading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="30dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

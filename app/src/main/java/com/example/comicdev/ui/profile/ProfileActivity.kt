@@ -3,9 +3,12 @@ package com.example.comicdev.ui.profile
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
 import androidx.core.widget.doOnTextChanged
 import com.example.comicdev.R
 import com.example.comicdev.databinding.ActivityProfileBinding
@@ -34,12 +37,17 @@ class ProfileActivity : AppCompatActivity() {
             modalBottomSheet.show(supportFragmentManager, "Select Image resource DIALOG")
         }
 
-        binding.btnSaveinfo.setOnClickListener{
+        binding.btnContinue.setOnClickListener{
             if (binding.textFullname.text?.isBlank() == true){
                 binding.inputFullname.error = "Name cannot be empty"
             }
             if (binding.textAge.text?.isBlank() == true){
                 binding.inputAge.error = "Age cannot be empty"
+            }
+            if (binding.inputGender.text.isEmpty()){
+                binding.genderContainer.error = "You must choose a gender"
+            } else {
+                binding.genderContainer.error = null
             }
         }
 
