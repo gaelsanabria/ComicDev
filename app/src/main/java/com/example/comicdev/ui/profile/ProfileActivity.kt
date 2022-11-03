@@ -38,16 +38,23 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         binding.btnContinue.setOnClickListener{
-            if (binding.textFullname.text?.isBlank() == true){
-                binding.inputFullname.error = "Name cannot be empty"
+            if (binding.textFullname.text?.isNotBlank() == true &&
+                binding.textAge.text?.isNotBlank() == true &&
+                binding.inputGender.text.isNotEmpty()){
+                Log.d("TAG", "onCreate: SUCCESS")
             }
-            if (binding.textAge.text?.isBlank() == true){
-                binding.inputAge.error = "Age cannot be empty"
-            }
-            if (binding.inputGender.text.isEmpty()){
-                binding.genderContainer.error = "You must choose a gender"
-            } else {
-                binding.genderContainer.error = null
+            else {
+                if (binding.textFullname.text?.isBlank() == true){
+                    binding.inputFullname.error = "Name cannot be empty"
+                }
+                if (binding.textAge.text?.isBlank() == true){
+                    binding.inputAge.error = "Age cannot be empty"
+                }
+                if (binding.inputGender.text.isEmpty()){
+                    binding.genderContainer.error = "You must choose a gender"
+                } else {
+                    binding.genderContainer.error = null
+                }
             }
         }
 
