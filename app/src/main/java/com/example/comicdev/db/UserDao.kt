@@ -1,18 +1,16 @@
 package com.example.comicdev.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
+import com.example.comicdev.entities.User
 
 @Dao
 interface UserDao {
 
-    @Query("SELECT * FROM user WHERE uid IN (:userIds)")
-    fun loadAllByIds(userIds: IntArray): List<User>
+    @Query("SELECT * FROM user")
+    fun loadUser(): List<User>
 
-    @Insert
-    fun insertAll(vararg users: User)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addUser(user: User)
 
     @Update
     fun updateUsers(vararg users: User)

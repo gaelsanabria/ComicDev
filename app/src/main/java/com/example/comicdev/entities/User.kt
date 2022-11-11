@@ -1,4 +1,4 @@
-package com.example.comicdev.db
+package com.example.comicdev.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

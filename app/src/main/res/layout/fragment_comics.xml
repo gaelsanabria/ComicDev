@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:cardCornerRadius="10dp">
 
-        <SearchView
+        <androidx.appcompat.widget.SearchView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/light_grey"
@@ -48,17 +48,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="150dp"
-                android:layout_height="250dp"
-                app:cardCornerRadius="10dp">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/img_comic_test"
-                    app:srcCompat="@drawable/comic_card">
-                </ImageView>
-            </androidx.cardview.widget.CardView>
+            <ListView
+                android:id="@+id/lv_most_popular"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ListView>
         </LinearLayout>
     </HorizontalScrollView>
 

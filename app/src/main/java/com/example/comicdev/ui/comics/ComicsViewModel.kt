@@ -11,3 +11,4 @@ class ComicsViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 }
+

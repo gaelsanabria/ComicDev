@@ -1,11 +1,11 @@
-package com.example.comicdev.db
+package com.example.comicdev.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class FavoriteComics(
+data class FavoriteCharacters(
     @PrimaryKey val uid: Int,
     @ColumnInfo(name = "url") val Name: String,
 )

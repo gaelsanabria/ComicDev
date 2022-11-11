@@ -1,19 +1,25 @@
 package com.example.comicdev.ui.profile
 
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isEmpty
-import androidx.core.view.isNotEmpty
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.ViewModelProvider
 import com.example.comicdev.R
 import com.example.comicdev.databinding.ActivityProfileBinding
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.textfield.TextInputLayout
+import com.example.comicdev.entities.User
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -21,11 +27,15 @@ class ProfileActivity : AppCompatActivity() {
 
     private val modalBottomSheet = CameraGalleryDialogFragment()
 
+    private lateinit var viewModel: ProfileViewModel
+
+    var picture : Bitmap? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
+        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
         val items = listOf("Male", "Female", "None")
         val adapter = ArrayAdapter(applicationContext, R.layout.list_item, items)
@@ -38,19 +48,25 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         binding.btnContinue.setOnClickListener{
-            if (binding.textFullname.text?.isNotBlank() == true &&
-                binding.textAge.text?.isNotBlank() == true &&
-                binding.inputGender.text.isNotEmpty()){
-                Log.d("TAG", "onCreate: SUCCESS")
+            val name = binding.textFullname.text.toString()
+            val age = binding.textAge.text.toString()
+            val gender = binding.inputGender.text.toString()
+            if (name.isNotEmpty() &&
+                age.isNotEmpty() &&
+               gender.isNotEmpty()){
+                val user = User(0, name, gender, age.toInt(),
+                    picture?.let { it1 -> saveImgToInternalStorage(it1) })
+                viewModel.addUser(user)
+                finish()
             }
             else {
-                if (binding.textFullname.text?.isBlank() == true){
+                if (name.isEmpty()){
                     binding.inputFullname.error = "Name cannot be empty"
                 }
-                if (binding.textAge.text?.isBlank() == true){
+                if (age.isEmpty()){
                     binding.inputAge.error = "Age cannot be empty"
                 }
-                if (binding.inputGender.text.isEmpty()){
+                if (gender.isEmpty()){
                     binding.genderContainer.error = "You must choose a gender"
                 } else {
                     binding.genderContainer.error = null
@@ -67,40 +83,40 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    /*
-    private fun CheckAllFields(): Boolean {
-        if (etFirstName!!.length() == 0) {
-            etFirstName!!.error = "This field is required"
-            return false
+    private fun saveImgToInternalStorage(bitmapImage: Bitmap): String? {
+        val cw = ContextWrapper(applicationContext)
+        // path to /data/data/yourapp/app_data/imageDir
+        val directory: File = cw.getDir("picture", Context.MODE_PRIVATE)
+        // Create imageDir
+        val mypath = File(directory, "profile.jpg")
+        var fos: FileOutputStream? = null
+        try {
+            fos = FileOutputStream(mypath)
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            try {
+                fos?.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
-        if (etLastName!!.length() == 0) {
-            etLastName!!.error = "This field is required"
-            return false
-        }
-        if (etEmail!!.length() == 0) {
-            etEmail!!.error = "Email is required"
-            return false
-        }
-        if (etPassword!!.length() == 0) {
-            etPassword!!.error = "Password is required"
-            return false
-        } else if (etPassword!!.length() < 8) {
-            etPassword!!.error = "Password must be minimum 8 characters"
-            return false
-        }
-
-        // after all validation return true.
-        return true
-    }*/
+        return mypath.absolutePath
+        Log.d("PATH", "${mypath.absolutePath}")
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         modalBottomSheet.onActivityResult(requestCode, resultCode, data)
-        var bmp = data?.extras?.get("data") as Bitmap
+        var bmp = data?.extras?.get("data") as? Bitmap
         if (requestCode == 0){
             binding.profilePicture.setImageBitmap(bmp)
+            picture = bmp
         } else if (requestCode == 1) {
             binding.profilePicture.setImageURI(data?.data)
+            picture = MediaStore.Images.Media.getBitmap(this.contentResolver, data?.data);
         }
     }
 }
