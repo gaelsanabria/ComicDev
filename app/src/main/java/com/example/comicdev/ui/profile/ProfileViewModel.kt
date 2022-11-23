@@ -26,4 +26,34 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             repository.addUser(user)
         }
     }
+
+    fun loadUser() {
+        viewModelScope.launch {
+            repository.loadUserData()
+        }
+    }
+
+    fun loadUserName() {
+        viewModelScope.launch {
+            repository.loadUserName()
+        }
+    }
+
+    fun loadUserGender() {
+        viewModelScope.launch {
+            repository.loadUserGender()
+        }
+    }
+
+    fun loadUserAge() {
+        viewModelScope.launch {
+            repository.loadUserAge()
+        }
+    }
+
+    fun loadUserPicture() {
+        viewModelScope.launch {
+            repository.loadUserPic()
+        }
+    }
 }

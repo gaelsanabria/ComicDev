@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         repository = UserRepository(userDao)
 
         Handler().postDelayed({
-            if (repository.loadUserData().isEmpty()) {
+            if (repository.loadUserData().Name == null) {
                 modalLoadingFragment.dismiss()
                 val intent = Intent(this, ProfileActivity::class.java)
                 startActivity(intent)

@@ -8,7 +8,23 @@ class UserRepository(private val userDao : UserDao) {
         userDao.addUser(user)
     }
 
-    fun loadUserData(): List<User> {
+    fun loadUserData(): User {
         return userDao.loadUser()
+    }
+
+    fun loadUserName(): List<String> {
+        return userDao.loadUserName()
+    }
+
+    fun loadUserAge(): List<Int> {
+        return userDao.loadUserAge()
+    }
+
+    fun loadUserGender(): List<String> {
+        return userDao.loadUserGender()
+    }
+
+    fun loadUserPic(): List<String> {
+        return userDao.loadUserPic()
     }
 }
