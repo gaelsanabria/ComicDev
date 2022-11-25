@@ -27,33 +27,9 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun loadUser() {
+    fun updateUser(user : User) {
         viewModelScope.launch {
-            repository.loadUserData()
-        }
-    }
-
-    fun loadUserName() {
-        viewModelScope.launch {
-            repository.loadUserName()
-        }
-    }
-
-    fun loadUserGender() {
-        viewModelScope.launch {
-            repository.loadUserGender()
-        }
-    }
-
-    fun loadUserAge() {
-        viewModelScope.launch {
-            repository.loadUserAge()
-        }
-    }
-
-    fun loadUserPicture() {
-        viewModelScope.launch {
-            repository.loadUserPic()
+            repository.updateUserData(user)
         }
     }
 }

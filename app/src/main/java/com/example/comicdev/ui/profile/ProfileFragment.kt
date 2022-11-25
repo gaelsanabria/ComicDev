@@ -1,6 +1,7 @@
 package com.example.comicdev.ui.profile
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.comicdev.databinding.FragmentProfileBinding
 import com.example.comicdev.db.AppDatabase
 import com.example.comicdev.entities.User
@@ -28,6 +30,7 @@ class ProfileFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    lateinit var user: User
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +54,15 @@ class ProfileFragment : Fragment() {
             //textView.text = it
         }
 
-
+        binding.btnEditProfile.setOnClickListener{
+            val intent = Intent(requireContext(), ProfileActivity::class.java)
+            intent.putExtra("calledFrom", "editProfile")
+                .putExtra("name", binding.textUsername.text)
+                .putExtra("age", binding.textAge.text)
+                .putExtra("gender", user.Gender)
+                .putExtra("picture", user.Picture)
+            startActivityForResult(intent, 1)
+        }
 
         return root
     }
@@ -62,7 +73,6 @@ class ProfileFragment : Fragment() {
     }
 
     private fun loadUser() {
-        lateinit var user: User
         GlobalScope.launch {
             user = appDb.userDao().loadUser()
             Log.d("User Data",user.toString())
@@ -80,9 +90,21 @@ class ProfileFragment : Fragment() {
             context?.let {
                 Glide.with(it)
                     .load(user.Picture)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
                     .centerCrop()
                     .into(binding.cardImage)
             }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        updateUser()
+    }
+
+    private fun updateUser() {
+        appDb = AppDatabase.getDatabase(requireContext())
+        loadUser()
     }
 }

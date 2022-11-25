@@ -21,9 +21,9 @@ interface UserDao {
     @Query("SELECT picture FROM user")
     fun loadUserPic(): List<String>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addUser(user: User)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateUsers(vararg users: User)
 }

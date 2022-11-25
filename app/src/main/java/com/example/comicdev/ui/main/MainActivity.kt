@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             if (repository.loadUserData().Name == null) {
                 modalLoadingFragment.dismiss()
                 val intent = Intent(this, ProfileActivity::class.java)
+                intent.putExtra("calledFrom", "firstTime")
                 startActivity(intent)
             } else modalLoadingFragment.dismiss()
         }, 2000)
