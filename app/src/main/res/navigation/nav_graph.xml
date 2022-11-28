@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/CharacterFragment">
+
+    <fragment
+        android:id="@+id/CharacterFragment"
+        android:name="com.example.comicdev.ui.characters.CharactersFragment"
+        android:label="fragment_all_heroes"
+        tools:layout="@layout/fragment_characters" >
+        <action
+            android:id="@+id/action_allHeroFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+        <action
+            android:id="@+id/action_allHeroFragment_to_favouriteCharacterFragment"
+            app:destination="@id/favouriteCharacterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.example.comicdev.ui.characters.CharacterDetails"
+        android:label="fragment_character_detail"
+        tools:layout="@layout/fragment_character_details" >
+        <argument
+            android:name="character"
+            app:argType="com.cg.marvel_app.data.characters.CharacterResult" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteCharacterFragment"
+        android:name="com.example.comicdev.ui.favorites.FavoritesFragment"
+        android:label="fragment_favourite_characters"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favouriteCharacterFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+    </fragment>
+</navigation>

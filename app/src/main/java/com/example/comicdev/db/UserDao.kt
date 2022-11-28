@@ -1,5 +1,6 @@
 package com.example.comicdev.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.comicdev.entities.User
 
@@ -7,7 +8,7 @@ import com.example.comicdev.entities.User
 interface UserDao {
 
     @Query("SELECT * FROM user")
-    fun loadUser(): User
+    fun getUser(): LiveData<User>
 
     @Query("SELECT name FROM user")
     fun loadUserName(): List<String>

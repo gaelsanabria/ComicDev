@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.comicdev.databinding.ActivityOnboardingBinding
 import com.example.comicdev.ui.main.MainActivity
 import com.example.comicdev.ui.main.ViewPagerAdapter
+import com.example.comicdev.ui.profile.ProfileActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class OnboardingActivity : AppCompatActivity() {
@@ -58,7 +59,7 @@ class OnboardingActivity : AppCompatActivity() {
             } else {
                 val sharedPreferences = getSharedPreferences("Onboarding", Context.MODE_PRIVATE)
                 sharedPreferences.edit().putString("onboarding", "1").apply()
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, ProfileActivity::class.java)
                 startActivity(intent)
                 finish()
             }

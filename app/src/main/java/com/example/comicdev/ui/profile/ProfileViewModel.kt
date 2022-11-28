@@ -1,7 +1,6 @@
 package com.example.comicdev.ui.profile
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.*
 import com.example.comicdev.db.AppDatabase
 import com.example.comicdev.db.repositories.UserRepository
@@ -16,9 +15,11 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     val text: LiveData<String> = _text
 
     private val repository : UserRepository
+    val getUser : LiveData<User>
     init {
         val userDao = AppDatabase.getDatabase(application).userDao()
         repository = UserRepository(userDao)
+        getUser = repository.getUser()
     }
 
     fun addUser(user : User){

@@ -23,15 +23,10 @@ class ComicsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val homeViewModel =
-            ViewModelProvider(this).get(ComicsViewModel::class.java)
+            ViewModelProvider(this).get(ComicViewModel::class.java)
 
         _binding = FragmentComicsBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        //val textView: TextView = binding.textComics
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            //textView.text = it
-        }
         return root
     }
 

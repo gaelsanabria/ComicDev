@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.12440047961630696" />
         <entry key="app/src/main/res/drawable/circle_shape.xml" value="0.163" />
         <entry key="app/src/main/res/drawable/circle_shape_profile.xml" value="0.227" />
         <entry key="app/src/main/res/drawable/comic_card.xml" value="0.176" />
@@ -40,7 +41,9 @@
         <entry key="app/src/main/res/layout/fragment_onboarding_finish.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_onboarding_page2.xml" value="0.15648148148148147" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.178125" />
+        <entry key="app/src/main/res/layout/fragment_profile_edit.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.1953125" />
+        <entry key="app/src/main/res/layout/list_item_character.xml" value="0.24456521739130435" />
         <entry key="app/src/main/res/layout/list_layout.xml" value="0.1953125" />
         <entry key="app/src/main/res/layout/list_most_popular_item.xml" value="0.55" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.17916666666666667" />

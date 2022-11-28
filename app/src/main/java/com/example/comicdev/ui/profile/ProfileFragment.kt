@@ -1,16 +1,14 @@
 package com.example.comicdev.ui.profile
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.comicdev.databinding.FragmentProfileBinding
@@ -25,46 +23,31 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
 
-    private lateinit var appDb : AppDatabase
     private lateinit var viewModel: ProfileViewModel
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    lateinit var user: User
+    private lateinit var user: LiveData<User>
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
-        appDb = AppDatabase.getDatabase(requireContext())
-        loadUser()
-
-        val root: View = binding.root
-
-        //val textView: TextView = binding.textProfile
-        profileViewModel.text.observe(viewLifecycleOwner) {
-            //textView.text = it
+        viewModel.getUser.observe(viewLifecycleOwner){ user ->
+            displayData(user)
         }
 
         binding.btnEditProfile.setOnClickListener{
-            val intent = Intent(requireContext(), ProfileActivity::class.java)
-            intent.putExtra("calledFrom", "editProfile")
-                .putExtra("name", binding.textUsername.text)
-                .putExtra("age", binding.textAge.text)
-                .putExtra("gender", user.Gender)
-                .putExtra("picture", user.Picture)
-            startActivityForResult(intent, 1)
+            startActivity(Intent(requireContext(), ProfileActivity::class.java))
         }
 
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -72,16 +55,7 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
-    private fun loadUser() {
-        GlobalScope.launch {
-            user = appDb.userDao().loadUser()
-            Log.d("User Data",user.toString())
-            displayData(user)
-        }
-    }
-
-    private suspend fun displayData(user: User) {
-        withContext(Dispatchers.Main){
+    private fun displayData(user: User) {
 
             binding.textUsername.text = user.Name
             binding.textAge.text = user.Age.toString()
@@ -95,7 +69,6 @@ class ProfileFragment : Fragment() {
                     .centerCrop()
                     .into(binding.cardImage)
             }
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -104,7 +77,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun updateUser() {
-        appDb = AppDatabase.getDatabase(requireContext())
-        loadUser()
+        //appDb = AppDatabase.getDatabase(requireContext())
+        //loadUser()
     }
 }

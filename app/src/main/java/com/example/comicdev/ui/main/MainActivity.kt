@@ -3,7 +3,9 @@ package com.example.comicdev.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -13,6 +15,7 @@ import com.example.comicdev.databinding.ActivityMainBinding
 import com.example.comicdev.db.AppDatabase
 import com.example.comicdev.db.repositories.UserRepository
 import com.example.comicdev.ui.profile.ProfileActivity
+import com.example.comicdev.ui.profile.ProfileViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -45,20 +48,17 @@ class MainActivity : AppCompatActivity() {
 
         navView.setupWithNavController(navController)
 
-        modalLoadingFragment.show(supportFragmentManager, "Loading fragment")
+        //modalLoadingFragment.show(supportFragmentManager, "Loading fragment")
 
-        val repository: UserRepository
-        val userDao = AppDatabase.getDatabase(application).userDao()
-        repository = UserRepository(userDao)
-
+        /*
         Handler().postDelayed({
-            if (repository.loadUserData().Name == null) {
+            if (repository.getUser().) {
                 modalLoadingFragment.dismiss()
                 val intent = Intent(this, ProfileActivity::class.java)
                 intent.putExtra("calledFrom", "firstTime")
                 startActivity(intent)
             } else modalLoadingFragment.dismiss()
-        }, 2000)
+        }, 2000)*/
 
     }
 }

@@ -8,17 +8,16 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
-import android.widget.*
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.comicdev.R
 import com.example.comicdev.databinding.ActivityProfileBinding
 import com.example.comicdev.entities.User
+import com.example.comicdev.ui.main.MainActivity
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -34,26 +33,29 @@ class ProfileActivity : AppCompatActivity() {
 
     private var newPicGenerated = false
 
-    var picture : Bitmap? = null
+    var picture: Bitmap? = null
+
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+        viewModel.getUser.observe(this) { user ->
+            if (user != null) {
+                displayUserInfo(user)
+            }
+        }
         val items = listOf("Male", "Female", "None")
         val adapter = ArrayAdapter(applicationContext, R.layout.list_item, items)
         binding.inputGender.setAdapter(adapter)
-        val addPic: View = findViewById(R.id.add_picture)
-        val currentName = intent.getStringExtra("name")
-        val currentGender = intent.getStringExtra("gender")
-        val currentAge = intent.getStringExtra("age")
-        val currentPicture = intent.getStringExtra("picture")
 
-        addPic.setOnClickListener {
+        binding.addPicture.setOnClickListener {
             modalBottomSheet.show(supportFragmentManager, "Select Image resource DIALOG")
         }
 
+        /*
         when (intent.getStringExtra("calledFrom")){
             "firstTime" -> {}
             "editProfile" -> {
@@ -73,25 +75,24 @@ class ProfileActivity : AppCompatActivity() {
                         .into(binding.profilePicture)
             }
             else -> {}
-        }
+        }*/
 
         binding.btnContinue.setOnClickListener{
             val name = binding.textFullname.text.toString()
             val age = binding.textAge.text.toString()
             val gender = binding.inputGender.text.toString()
-            Log.d("age", age)
             if (name.isNotEmpty() &&
                 age.isNotEmpty() &&
-               gender.isNotEmpty()){
-                val user : User = if (newPicGenerated){
-                    User(0, name, gender, age.toInt(),
+               gender.isNotEmpty()) {
+                if (newPicGenerated) {
+                    user = User(0, name, gender, age.toInt(),
                         picture?.let { it1 -> saveImgToInternalStorage(it1) })
-                } else{
-                    User(0, name, gender, age.toInt(), currentPicture)
+                } else {
+                    user = User(0, name, gender, age.toInt(), null)
                 }
-                    viewModel.addUser(user)
-                        Log.d("entered", "yes")
-                        finish()
+                viewModel.addUser(user)
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
             else {
                 if (name.isEmpty()){
@@ -117,15 +118,28 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun displayUserInfo(user: User) {
+        binding.textFullname.setText(user.Name)
+        binding.textAge.setText(user.Age.toString())
+        binding.inputGender.setText(user.Gender)
+        Glide.with(applicationContext)
+            .load(user.Picture)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .centerCrop()
+            .into(binding.profilePicture)
+
+    }
+
     private fun saveImgToInternalStorage(bitmapImage: Bitmap): String? {
-            val cw = ContextWrapper(applicationContext)
-            // path to /data/data/yourapp/app_data/imageDir
-            val directory: File = cw.getDir("picture", Context.MODE_PRIVATE)
-            // Create imageDir
-            val myPath = File(directory, "profile.jpg")
-            var fos: FileOutputStream? = null
-            try {
-                fos = FileOutputStream(myPath, false)
+        val cw = ContextWrapper(applicationContext)
+        // path to /data/data/yourapp/app_data/imageDir
+        val directory: File = cw.getDir("picture", Context.MODE_PRIVATE)
+        // Create imageDir
+        val myPath = File(directory, "profile.jpg")
+        var fos: FileOutputStream? = null
+        try {
+            fos = FileOutputStream(myPath, false)
                 // Use the compress method on the BitMap object to write image to the OutputStream
                 bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos)
             } catch (e: Exception) {
@@ -154,6 +168,7 @@ class ProfileActivity : AppCompatActivity() {
                 picture = MediaStore.Images.Media.getBitmap(this.contentResolver, data?.data);
             }
             newPicGenerated = true
+            Log.d("TAG", "onActivityResult: $newPicGenerated")
         }
     }
 
