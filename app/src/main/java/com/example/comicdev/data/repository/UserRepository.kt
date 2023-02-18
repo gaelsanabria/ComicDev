@@ -1,4 +1,4 @@
-package com.example.comicdev.db.repositories
+package com.example.comicdev.data.repository
 
 import androidx.lifecycle.LiveData
 import com.example.comicdev.db.UserDao

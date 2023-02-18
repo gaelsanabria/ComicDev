@@ -5,15 +5,23 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="195dp"
-        android:layout_height="250dp"
-        app:cardCornerRadius="10dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/img_characters_test"
-            app:srcCompat="@drawable/comic_card">
-        </ImageView>
-    </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:id="@+id/layout_list_item_character"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="195dp"
+            android:layout_height="250dp"
+            app:cardCornerRadius="10dp">
+            <ImageView
+                android:id="@+id/cardview_character_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/img_characters_test"
+                app:srcCompat="@drawable/comic_card">
+            </ImageView>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

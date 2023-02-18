@@ -1,17 +1,14 @@
-package com.example.comicdev
+package com.example.comicdev.ui
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
+import com.example.comicdev.R
 import com.example.comicdev.databinding.ActivityOnboardingBinding
-import com.example.comicdev.ui.main.MainActivity
 import com.example.comicdev.ui.main.ViewPagerAdapter
 import com.example.comicdev.ui.profile.ProfileActivity
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class OnboardingActivity : AppCompatActivity() {
 

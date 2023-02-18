@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_characters"
-        android:name="com.example.comicdev.ui.characters.CharactersFragment"
+        android:name="com.example.comicdev.ui.CharactersList.CharactersFragment"
         android:label="Characters"
         tools:layout="@layout/fragment_characters" />
 

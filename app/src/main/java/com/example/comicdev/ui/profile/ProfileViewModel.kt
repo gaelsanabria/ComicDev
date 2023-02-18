@@ -3,7 +3,7 @@ package com.example.comicdev.ui.profile
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.comicdev.db.AppDatabase
-import com.example.comicdev.db.repositories.UserRepository
+import com.example.comicdev.data.repository.UserRepository
 import com.example.comicdev.entities.User
 import kotlinx.coroutines.launch
 

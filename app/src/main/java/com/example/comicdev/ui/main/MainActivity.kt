@@ -1,24 +1,18 @@
 package com.example.comicdev.ui.main
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.example.comicdev.LoadingFragment
+import com.example.comicdev.ui.LoadingFragment
 import com.example.comicdev.R
 import com.example.comicdev.databinding.ActivityMainBinding
-import com.example.comicdev.db.AppDatabase
-import com.example.comicdev.db.repositories.UserRepository
-import com.example.comicdev.ui.profile.ProfileActivity
-import com.example.comicdev.ui.profile.ProfileViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ActivityContext
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

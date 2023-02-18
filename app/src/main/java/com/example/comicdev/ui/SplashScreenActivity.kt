@@ -1,4 +1,4 @@
-package com.example.comicdev
+package com.example.comicdev.ui
 
 import android.content.Context
 import android.content.Intent
@@ -7,10 +7,10 @@ import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.comicdev.R
 import com.example.comicdev.ui.main.MainActivity
 import com.example.comicdev.ui.profile.ProfileActivity
 import com.example.comicdev.ui.profile.ProfileViewModel
-import kotlinx.coroutines.delay
 
 class SplashScreenActivity : AppCompatActivity() {
 

@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.example.comicdev.data.characters.CharacterResult
 import com.example.comicdev.utils.Constants
 
-@Database(entities = [CharacterResult::class], version = Constants.DbConstant.DB_VERSION)
+@Database(entities = [CharacterResult::class], version = 1)
 abstract class MarvelDatabase : RoomDatabase() {
 
     abstract fun getCharacterDao(): CharacterDao
